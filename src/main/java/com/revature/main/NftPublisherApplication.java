@@ -2,12 +2,14 @@ package com.revature.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class DemoApplication {
+public class NftPublisherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(NftPublisherApplication.class, args);
+
 	}
 
 }
