@@ -15,3 +15,14 @@ This is the backend application for an NFT publishing application
 - `GET /nft/{nft_id}` - returns specific nft object
 - `DELETE /nft/{nft_id}` - deletes nft object from database, note that this does not delete the NFT from the blockchain, it is permanently stored there and we are just deleting our app's reference to it
 - `PATCH /nft/{nft_id}` - partially update nft object, used to update owner
+
+Currently in development..
+To run, 
+
+`git pull
+cd NFT-Publishing-System-Backend
+./gradlew build
+./gradlew run
+`
+
+Note: postgresql should be set up and running on localhost:5432

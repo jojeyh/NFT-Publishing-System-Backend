@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'application'
 }
 
 group = 'com.revature'
@@ -22,4 +23,8 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+application {
+	mainClass.set("com.revature.main.NftPublisherApplication")	
 }
