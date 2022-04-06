@@ -17,5 +17,4 @@ class NftPublisherApplicationTests {
 	void contextLoads() throws Exception {
 		Assertions.assertNotNull(controller);
 	}
-
 }
