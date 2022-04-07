@@ -19,10 +19,11 @@ This is the backend application for an NFT publishing application
 Currently in development..
 To run, 
 
-`git pull
+```
+git pull
 cd NFT-Publishing-System-Backend
 ./gradlew build
 ./gradlew run
-`
+```
 
 Note: postgresql should be set up and running on localhost:5432
