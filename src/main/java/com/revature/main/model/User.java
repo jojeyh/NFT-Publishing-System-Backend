@@ -20,6 +20,8 @@ public class User {
     @Column(name="nps_users_eth_address")
     private String ethAddress;
 
+    public User() {}
+
     public User(Long id, String username, String password, String ethAddress) {
         this.id = id;
         this.username = username;

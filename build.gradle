@@ -14,12 +14,12 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.assertj:assertj-core:3.22.0'
+	implementation 'com.google.code.gson:gson:2.9.0'
 	implementation 'org.postgresql:postgresql'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation 'org.mockito:mockito-all:1.10.19'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 }
 

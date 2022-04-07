@@ -9,7 +9,6 @@ public class NftPublisherApplication {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(NftPublisherApplication.class, args);
-
 	}
 
 }
