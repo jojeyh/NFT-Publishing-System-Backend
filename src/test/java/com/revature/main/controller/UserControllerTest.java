@@ -30,7 +30,12 @@ class UserControllerTest {
     @Test
     public void positive_getAllUsers() throws Exception {
         List<User> users = new ArrayList<>();
-        users.add(new User(1L, "patronius", "password", "0xfaceded"));
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("patronius");
+        user.setPassword("password");
+        user.setEthAddress("0xfaceded");
+        users.add(user);
 
         given(this.userService.getAllUsers()).willReturn(users);
 
