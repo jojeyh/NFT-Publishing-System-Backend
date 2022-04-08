@@ -13,14 +13,13 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.security.auth.login.FailedLoginException;
-import java.sql.Time;
 import java.util.concurrent.TimeUnit;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class AuthenticationTest {
+public class AuthenticationServiceTest {
 
     @Mock
     private UserRepository userRepository;

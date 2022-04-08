@@ -17,7 +17,13 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    // TODO Write unit tests
     public User createUser(User user) {
         return userRepository.save(user);
+    }
+
+    // /api/users/{user_id}
+    public User getUserById(Long id) {
+        return userRepository.getById(id);
     }
 }
