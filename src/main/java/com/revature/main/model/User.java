@@ -1,9 +1,14 @@
 package com.revature.main.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "nps_users")
+@NoArgsConstructor @Getter @Setter
 public class User {
 
     @Id
