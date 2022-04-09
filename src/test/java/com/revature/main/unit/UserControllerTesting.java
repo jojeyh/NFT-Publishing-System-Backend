@@ -1,21 +1,21 @@
 package com.revature.main.unit;
 
 import com.revature.main.model.User;
+import com.revature.main.service.AuthenticationService;
+import com.revature.main.service.JwtService;
 import com.revature.main.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
@@ -32,6 +32,12 @@ public class UserControllerTesting {
 
     @MockBean
     UserService userService;
+
+    @MockBean
+    AuthenticationService authService;
+
+    @MockBean
+    JwtService jwtService;
 
     @Test
     public void positive_getAllUsers() throws Exception {
@@ -69,15 +75,17 @@ public class UserControllerTesting {
         user.setPassword("pass123");
         user.setEthAddress("aox123123");
 
-        when(this.userService.getUserById(1L)).thenReturn(user);
+        when(this.userService.getUserById(1L)).thenReturn(Optional.of(user));
 
         mvc.perform(get("/users/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("Kratos"))
                 .andExpect(jsonPath("$.password").value("pass123"))
-                .andExpect(jsonPath("$.id").value(1L));
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.ethAddress").value("aox123123"));
     }
 
+    // TODO this test fails because of NestedServletException, fix later somehow
     @Test
     public void negativeTest_invalidId_getUserById() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
@@ -14,7 +15,7 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value="/users", method=RequestMethod.GET)
-    public List<User> getAllUsers() {
+    public Iterable<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
@@ -24,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping(value="/users/{id}")
-    public User getUserById(@PathVariable String id){
+    public Optional<User> getUserById(@PathVariable String id) {
 
         try {
             Long num = Long.parseLong(id);
@@ -32,5 +33,6 @@ public class UserController {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("User id must be an integer to retrieve an user");
         }
+
     }
 }

@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,9 +40,9 @@ public class UserServiceTest {
         mockUser.setPassword("password");
         mockUser.setEthAddress("0xaaaa");
 
-        when(userRepository.getById(1L)).thenReturn(mockUser);
+        when(userRepository.findById(1L)).thenReturn(Optional.of(mockUser));
 
-        User actual = userService.getUserById(1L);
+        Optional<User> actual = userService.getUserById(1L);
 
         User expected = new User();
         expected.setId(1L);
@@ -48,6 +50,6 @@ public class UserServiceTest {
         expected.setPassword("password");
         expected.setEthAddress("0xaaaa");
 
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertEquals(Optional.of(expected), actual);
     }
 }
