@@ -4,9 +4,11 @@ import com.revature.main.exception.BadParameterException;
 import com.revature.main.model.User;
 import com.revature.main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.FailedLoginException;
 
+@Service
 public class AuthenticationService {
 
     @Autowired

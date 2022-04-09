@@ -1,26 +1,31 @@
-package com.revature.main.integration;
+package com.revature.main.unit;
 
+import com.revature.main.model.User;
+import com.revature.main.service.UserService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.revature.main.model.User;
-import com.revature.main.service.UserService;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.BDDMockito.given;
-
 @WebMvcTest
-class UserControllerTest {
+@ExtendWith(MockitoExtension.class)
+public class UserControllerTesting {
 
     @Autowired
     private MockMvc mvc;
@@ -40,16 +45,19 @@ class UserControllerTest {
 
         given(this.userService.getAllUsers()).willReturn(users);
 
-        mvc.perform(get("/api/users"))
+        mvc.perform(get("/users"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].username").value("patronius"))
                 .andExpect(jsonPath("$[0].password").value("password"));
     }
 
     /*
+        public User getUserById(Long id);
 
         Positive test:
-        IllegalArgumentException on the controller layer for getUserById
+            Supplied id returns well-formed User
+        Negative test:
+            Invalid id throws IllegalArgumentException
 
      */
     @Test
@@ -63,10 +71,17 @@ class UserControllerTest {
 
         when(this.userService.getUserById(1L)).thenReturn(user);
 
-        mvc.perform(get("/users/{id}"))
+        mvc.perform(get("/users/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value("Kratos"))
-                .andExpect(jsonPath("$.password)").value("pass123"));
+                .andExpect(jsonPath("$.password").value("pass123"))
+                .andExpect(jsonPath("$.id").value(1L));
+    }
 
+    @Test
+    public void negativeTest_invalidId_getUserById() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            mvc.perform(get("/users/sddflsdf"));
+        });
     }
 }
