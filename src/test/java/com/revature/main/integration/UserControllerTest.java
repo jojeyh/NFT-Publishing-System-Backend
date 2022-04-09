@@ -1,5 +1,6 @@
 package com.revature.main.integration;
 
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -45,4 +46,27 @@ class UserControllerTest {
                 .andExpect(jsonPath("$[0].password").value("password"));
     }
 
+    /*
+
+        Positive test:
+        IllegalArgumentException on the controller layer for getUserById
+
+     */
+    @Test
+    public void positive_getUserById() throws Exception {
+
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("Kratos");
+        user.setPassword("pass123");
+        user.setEthAddress("aox123123");
+
+        when(this.userService.getUserById(1L)).thenReturn(user);
+
+        mvc.perform(get("/users/{id}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.username").value("Kratos"))
+                .andExpect(jsonPath("$.password)").value("pass123"));
+
+    }
 }

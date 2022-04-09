@@ -50,5 +50,4 @@ public class UserServiceTest {
 
         Assertions.assertEquals(expected, actual);
     }
-
 }
