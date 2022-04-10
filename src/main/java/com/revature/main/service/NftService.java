@@ -5,6 +5,8 @@ import com.revature.main.repository.NftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class NftService {
 
@@ -17,7 +19,16 @@ public class NftService {
 
      */
     public NFT addNFT(NFT nft) {
-
         return nftRepository.save(nft);
+    }
+
+    public Optional<NFT> getNFTById(Long id) {
+        return nftRepository.findById(id);
+    }
+
+    public Boolean deleteNFTById(Long id) {
+        nftRepository.deleteById(id);
+
+        return !nftRepository.existsById(id);
     }
 }

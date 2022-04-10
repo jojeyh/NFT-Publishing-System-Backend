@@ -7,10 +7,9 @@ import com.revature.main.model.UserJwtDTO;
 import com.revature.main.service.JwtService;
 import com.revature.main.service.NftService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class NftController {
@@ -23,7 +22,8 @@ public class NftController {
 
     @PostMapping(value="/nfts")
     public NFT createNFT(@RequestBody NFT nft,
-                         @RequestHeader String bearer) throws UnauthorizedResponse, JsonProcessingException {
+                         @RequestHeader(value="Authorization") String bearer)
+            throws UnauthorizedResponse, JsonProcessingException {
         String jwt = bearer.split(" ")[1];
 
         UserJwtDTO token = jwtService.parseJwt(jwt);
@@ -33,6 +33,16 @@ public class NftController {
         } else {
             throw new UnauthorizedResponse("You must have authorization to delete this account");
         }
+    }
+
+    @GetMapping(value="/nfts/{id}")
+    public Optional<NFT> getNFTById(@PathVariable String id) {
+        return nftService.getNFTById(Long.parseLong(id));
+    }
+
+    @DeleteMapping(value="/nfts/{id}")
+    public Boolean deleteNFTById(@PathVariable String id) {
+        return nftService.deleteNFTById(Long.parseLong(id));
     }
 }
 
