@@ -5,7 +5,7 @@ This is the backend application for an NFT publishing application
 ## Endpoints
 - `POST /login` - receives username/password and returns JWT upon success or error on failure
 - `POST /users` - receives new user info, generates user object and adds to database, returns success/failure
-- `GET /users` - returns private user page for logged in user
+- `GET /users` - returns all users
 - `GET /users/{user_id}` - get public profile for user, to be viewed by other users
 - `GET /users/{user_id}/images` - return all images for given user
 - `POST /users/{user_id}/images` - receive new image object and add to database, return success/failure
