@@ -3,6 +3,7 @@ package com.revature.main.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.revature.main.exception.UnauthorizedResponse;
 import com.revature.main.model.Image;
+import com.revature.main.model.NFT;
 import com.revature.main.model.User;
 import com.revature.main.model.UserJwtDTO;
 import com.revature.main.service.JwtService;
