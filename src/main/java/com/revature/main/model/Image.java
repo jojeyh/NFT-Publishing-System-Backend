@@ -1,6 +1,8 @@
 package com.revature.main.model;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.InputStream;
@@ -25,6 +27,7 @@ public class Image {
     private Byte[] image;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User author;
 
     @Column(name = "nps_images_contract_address")

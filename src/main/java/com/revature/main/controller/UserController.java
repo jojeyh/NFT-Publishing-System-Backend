@@ -7,8 +7,6 @@ import com.revature.main.model.User;
 import com.revature.main.model.UserJwtDTO;
 import com.revature.main.service.JwtService;
 import com.revature.main.service.UserService;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -86,4 +84,24 @@ public class UserController {
         return userService.uploadImage(userId, image);
     }
 
+    /*
+        Requires authorization
+
+        If user is deleted returns `true` otherwise returns `false`
+     */
+    @DeleteMapping(value="/users/{id}")
+    public Boolean deleteUserById(@PathVariable String id,
+                                  @RequestHeader(value="Authorization") String bearer)
+            throws JsonProcessingException, UnauthorizedResponse {
+        Long userId = Long.parseLong(id);
+        String jwt = bearer.split(" ")[1];
+
+        UserJwtDTO token = jwtService.parseJwt(jwt);
+
+        if (!token.getUserId().equals(id)) {
+            return userService.deleteUserById(userId);
+        } else {
+            throw new UnauthorizedResponse("You must have authorization to delete this account");
+        }
+    }
 }

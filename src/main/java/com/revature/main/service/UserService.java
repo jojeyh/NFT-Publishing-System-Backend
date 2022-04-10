@@ -52,4 +52,9 @@ public class UserService {
     public Optional<Image> getImageByImageId(Long imageId) {
         return imageRepository.findById(imageId);
     }
+
+    public Boolean deleteUserById(Long id) {
+        userRepository.deleteById(id);
+        return !userRepository.existsById(id);
+    }
 }

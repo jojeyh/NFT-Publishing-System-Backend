@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 
+// TODO persist JWT for a specific user for 30 days
+
 @Service
 public class JwtService {
 
