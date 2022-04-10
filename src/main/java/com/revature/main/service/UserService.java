@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    // TODO store passwords as hashes, change User to not store passwords
 
     @Autowired
     UserRepository userRepository;
@@ -35,9 +36,7 @@ public class UserService {
     }
 
     public Iterable<Image> getImagesByUserId(Long id) {
-        List<Long> ids = new ArrayList<>();
-        ids.add(id);
-        return imageRepository.findAllById(ids);
+        return imageRepository.findImagesByUserId(id);
     }
 
     // TODO add check to see if user exists, if not cannot add image
