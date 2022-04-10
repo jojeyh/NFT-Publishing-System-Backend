@@ -14,7 +14,7 @@ public class User {
     @Column(name="nps_users_id")
     private Long id;
 
-    @Column(name="nps_users_username")
+    @Column(name="nps_users_username", unique=true)
     private String username;
 
     @Column(name="nps_users_password")
