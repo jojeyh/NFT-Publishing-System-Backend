@@ -50,6 +50,11 @@ public class UserController {
         return userService.getImagesByUserId(Long.parseLong(id));
     }
 
+    @GetMapping(value="/users/{userId}/images/{imageId}")
+    public Optional<Image> getImageByImageId(@PathVariable String userId, @PathVariable String imageId) {
+        return userService.getImageByImageId(Long.parseLong(imageId));
+    }
+
     /*
             Requires authentication
 
@@ -80,4 +85,5 @@ public class UserController {
 
         return userService.uploadImage(userId, image);
     }
+
 }

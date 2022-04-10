@@ -48,4 +48,8 @@ public class UserService {
             throw new UnauthorizedResponse("Cannot add images that do not belong to you");
         }
     }
+
+    public Optional<Image> getImageByImageId(Long imageId) {
+        return imageRepository.findById(imageId);
+    }
 }
