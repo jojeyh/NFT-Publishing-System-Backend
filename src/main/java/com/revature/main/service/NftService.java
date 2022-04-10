@@ -11,7 +11,13 @@ public class NftService {
     @Autowired
     NftRepository nftRepository;
 
-    public NFT addNFT(NFT nft){
+    /*
+        Requires authentication
+
+
+     */
+    public NFT addNFT(NFT nft) {
+
         return nftRepository.save(nft);
     }
 }

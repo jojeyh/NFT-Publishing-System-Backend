@@ -16,7 +16,7 @@ public class NFT {
     @Column(name = "nft_symbol")
     private String symbol;
 
-    @Column(name = "nft_contract_address")
+    @Column(name = "nft_contract_address", unique=true)
     private String contractAddress;
 
     @Column(name = "nft_name")
