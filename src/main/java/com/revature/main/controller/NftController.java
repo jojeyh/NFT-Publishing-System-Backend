@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(originPatterns = "*", exposedHeaders = "*", allowedHeaders = "*")
 public class NftController {
 
     @Autowired
