@@ -1,5 +1,6 @@
 package com.revature.main.unit;
 
+import com.revature.main.model.Image;
 import com.revature.main.model.User;
 import com.revature.main.repository.UserRepository;
 import com.revature.main.service.UserService;
@@ -10,6 +11,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
@@ -51,5 +54,18 @@ public class UserServiceTest {
         expected.setEthAddress("0xaaaa");
 
         Assertions.assertEquals(Optional.of(expected), actual);
+    }
+
+    /*
+        public Iterable<Image> getImagesByUserId(Long id)
+
+        Positive Test:
+            - Given valid id return well-formed Image list
+
+     */
+    @Test
+    public void positiveTest_getImagesByUserId() {
+        List<Image> images = new ArrayList<>();
+        Image mockImage = new Image();
     }
 }

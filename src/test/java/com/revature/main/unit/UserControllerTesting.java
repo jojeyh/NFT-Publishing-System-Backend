@@ -1,10 +1,10 @@
 package com.revature.main.unit;
 
+import com.revature.main.model.Image;
 import com.revature.main.model.User;
 import com.revature.main.service.AuthenticationService;
 import com.revature.main.service.JwtService;
 import com.revature.main.service.UserService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,4 +95,5 @@ public class UserControllerTesting {
         });
     }
      */
+
 }

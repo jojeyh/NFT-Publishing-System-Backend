@@ -1,10 +1,14 @@
 package com.revature.main.service;
 
+import com.revature.main.exception.UnauthorizedResponse;
+import com.revature.main.model.Image;
 import com.revature.main.model.User;
+import com.revature.main.repository.ImageRepository;
 import com.revature.main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +17,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ImageRepository imageRepository;
 
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
@@ -23,8 +30,22 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // /api/users/{user_id}
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public Iterable<Image> getImagesByUserId(Long id) {
+        List<Long> ids = new ArrayList<>();
+        ids.add(id);
+        return imageRepository.findAllById(ids);
+    }
+
+    // TODO add check to see if user exists, if not cannot add image
+    public Image uploadImage(Long userId, Image image) throws UnauthorizedResponse {
+        if (userId == image.getAuthor().getId()) {
+            return imageRepository.save(image);
+        } else {
+            throw new UnauthorizedResponse("Cannot add images that do not belong to you");
+        }
     }
 }

@@ -1,16 +1,12 @@
 package com.revature.main.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "nps_nfts")
-@NoArgsConstructor @Getter @Setter @ToString
+@NoArgsConstructor @Getter @Setter @ToString @EqualsAndHashCode
 public class NFT {
 
     @Id
@@ -38,16 +34,4 @@ public class NFT {
     @ManyToOne
     private User author;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof NFT)) return false;
-        NFT nft = (NFT) o;
-        return id.equals(nft.id) && Objects.equals(symbol, nft.symbol) && Objects.equals(contractAddress, nft.contractAddress) && Objects.equals(name, nft.name) && tokenId.equals(nft.tokenId) && owner.equals(nft.owner) && tokenUri.equals(nft.tokenUri) && author.equals(nft.author);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, symbol, contractAddress, name, tokenId, owner, tokenUri, author);
-    }
 }
