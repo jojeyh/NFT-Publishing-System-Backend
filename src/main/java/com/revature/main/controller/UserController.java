@@ -88,6 +88,8 @@ public class UserController {
         Requires authorization
 
         If user is deleted returns `true` otherwise returns `false`
+
+        Note: User deletion will CASACDE DELETE all linked rows in table 'nps_images'
      */
     @DeleteMapping(value="/users/{id}")
     public Boolean deleteUserById(@PathVariable String id,
