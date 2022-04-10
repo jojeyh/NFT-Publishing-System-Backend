@@ -20,7 +20,7 @@ Currently in development..
 To run, 
 
 ```
-git pull
+git clone https://github.com/polydin/NFT-Publishing-System-Backend.git
 cd NFT-Publishing-System-Backend
 ./gradlew build
 ./gradlew run
