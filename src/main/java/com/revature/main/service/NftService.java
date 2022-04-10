@@ -31,4 +31,8 @@ public class NftService {
 
         return !nftRepository.existsById(id);
     }
+
+    public NFT updateNFT(NFT nft) {
+        return nftRepository.save(nft);
+    }
 }

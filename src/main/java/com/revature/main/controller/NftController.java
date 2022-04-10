@@ -44,5 +44,30 @@ public class NftController {
     public Boolean deleteNFTById(@PathVariable String id) {
         return nftService.deleteNFTById(Long.parseLong(id));
     }
+
+    // TODO Include authorization logic for changing ownershi
+    /*
+        Requires fully-formed nft object to be patched
+     */
+    @PatchMapping(value="/nfts/{id}")
+    public NFT updateNFT(@PathVariable String id,
+                         @RequestBody NFT nft,
+                         @RequestHeader(value="Authorization") String bearer) throws UnauthorizedResponse, JsonProcessingException {
+
+        /*
+        NFT originalNft = nftService.getNFTById(Long.parseLong(id)).get();
+
+        String jwt = bearer.split(" ")[1];
+
+        UserJwtDTO token = jwtService.parseJwt(jwt);
+
+        if (token.getUserId().equals(originalNft.getAuthor().getId())) {
+            return nftService.updateNFT(nft);
+        } else {
+            throw new UnauthorizedResponse("You must have authorization to update this nft");
+        }
+         */
+        return nftService.updateNFT(nft);
+    }
 }
 
