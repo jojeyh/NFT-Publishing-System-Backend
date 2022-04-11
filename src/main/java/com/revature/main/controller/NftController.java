@@ -29,7 +29,7 @@ public class NftController {
 
         UserJwtDTO token = jwtService.parseJwt(jwt);
 
-        if (token.getUserId().equals(nft.getAuthor().getId())) {
+        if (token.getUserId().equals(nft.getImage().getAuthor().getId())) {
             return nftService.addNFT(nft);
         } else {
             throw new UnauthorizedResponse("You must have authorization to delete this account");
