@@ -3,10 +3,9 @@ package com.revature.main.model;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import java.io.InputStream;
-import java.util.Objects;
 
 @Entity
 @Table(name = "nps_images")
@@ -24,7 +23,7 @@ public class Image {
  */
 
     @Column(name = "nps_images_image")
-    private Byte[] image;
+    private byte[] image;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

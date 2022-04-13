@@ -8,8 +8,13 @@ import com.revature.main.model.UserJwtDTO;
 import com.revature.main.service.JwtService;
 import com.revature.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Optional;
 
 @CrossOrigin(originPatterns = "*", exposedHeaders = "*", allowedHeaders = "*")
@@ -71,9 +76,9 @@ public class UserController {
 
      */
     @PostMapping(value="/users/{id}/images")
-    public Image uploadImage(@PathVariable String id,
-                             @RequestHeader(value="Authorization") String bearer,
-                             @RequestBody Image image) throws JsonProcessingException, UnauthorizedResponse {
+    public ResponseEntity<?> uploadImage(@PathVariable String id,
+                                         @RequestHeader(value="Authorization") String bearer,
+                                         @RequestParam("file") File file) throws IOException, UnauthorizedResponse {
         Long userId = Long.parseLong(id);
         String jwt = bearer.split(" ")[1];
 
@@ -82,8 +87,7 @@ public class UserController {
         if (!token.getUserId().equals(userId)) {
             throw new UnauthorizedResponse("You may only submit reimbursements for yourself");
         }
-
-        return userService.uploadImage(userId, image);
+        return null;
     }
 
     /*

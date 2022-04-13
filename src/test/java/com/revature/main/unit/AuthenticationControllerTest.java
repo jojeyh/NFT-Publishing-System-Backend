@@ -19,10 +19,4 @@ public class AuthenticationControllerTest {
     @MockBean
     private AuthenticationService authService;
 
-    /*
-        ResponseEntity<?> login(@RequestBody LoginDTO dto)
-
-        Positive
-     */
-
 }

@@ -40,12 +40,8 @@ public class UserService {
     }
 
     // TODO add check to see if user exists, if not cannot add image
-    public Image uploadImage(Long userId, Image image) throws UnauthorizedResponse {
-        if (userId == image.getAuthor().getId()) {
-            return imageRepository.save(image);
-        } else {
-            throw new UnauthorizedResponse("Cannot add images that do not belong to you");
-        }
+    public Image uploadImage(Image image) throws UnauthorizedResponse {
+        return imageRepository.save(image);
     }
 
     public Optional<Image> getImageByImageId(Long imageId) {
