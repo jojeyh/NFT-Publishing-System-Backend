@@ -39,7 +39,6 @@ public class UserService {
         return imageRepository.findImagesByUserId(id);
     }
 
-    // TODO add check to see if user exists, if not cannot add image
     public Image uploadImage(Image image) throws UnauthorizedResponse {
         return imageRepository.save(image);
     }

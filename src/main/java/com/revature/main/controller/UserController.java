@@ -76,9 +76,9 @@ public class UserController {
 
      */
     @PostMapping(value="/users/{id}/images")
-    public ResponseEntity<?> uploadImage(@PathVariable String id,
-                                         @RequestHeader(value="Authorization") String bearer,
-                                         @RequestParam("file") File file) throws IOException, UnauthorizedResponse {
+    public Image uploadImage(@PathVariable String id,
+                             @RequestHeader(value="Authorization") String bearer,
+                             @RequestBody Image image) throws UnauthorizedResponse, JsonProcessingException {
         Long userId = Long.parseLong(id);
         String jwt = bearer.split(" ")[1];
 
@@ -87,7 +87,8 @@ public class UserController {
         if (!token.getUserId().equals(userId)) {
             throw new UnauthorizedResponse("You may only submit reimbursements for yourself");
         }
-        return null;
+
+        return userService.uploadImage(image);
     }
 
     /*

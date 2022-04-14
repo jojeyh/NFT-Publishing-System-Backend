@@ -33,6 +33,7 @@ public class NFT {
     @Column(name = "nft_token_uri")
     private String tokenUri;
 
+    @JoinColumn(name = "nps_image")
     @ManyToOne
     private Image image;
 
