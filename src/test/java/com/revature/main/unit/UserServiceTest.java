@@ -1,7 +1,9 @@
 package com.revature.main.unit;
 
+import com.revature.main.exception.UserNotFoundException;
 import com.revature.main.model.Image;
 import com.revature.main.model.User;
+import com.revature.main.repository.ImageRepository;
 import com.revature.main.repository.UserRepository;
 import com.revature.main.service.UserService;
 import org.junit.jupiter.api.Assertions;
@@ -11,10 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,9 +26,12 @@ public class UserServiceTest {
 
     @Mock
     UserRepository userRepository;
+    ImageRepository imageRepository;
 
     @InjectMocks
     UserService userService;
+
+
 
     // TODO Write some negative tests
     /*
@@ -56,6 +63,7 @@ public class UserServiceTest {
         Assertions.assertEquals(Optional.of(expected), actual);
     }
 
+
     /*
         public Iterable<Image> getImagesByUserId(Long id)
 
@@ -63,9 +71,36 @@ public class UserServiceTest {
             - Given valid id return well-formed Image list
 
      */
+
     @Test
     public void positiveTest_getImagesByUserId() {
         List<Image> images = new ArrayList<>();
         Image mockImage = new Image();
+    }
+
+    @Test
+    public void testGetAllUsers() throws SQLException {
+        List<User> userList = (List<User>) userService.getAllUsers();
+        assertThat(userList).isNotNull();
+    }
+
+    @Test
+    public void createUserTest() {
+        User user = new User();
+        user.setId(1L);
+        user.setUsername("patronius");
+        user.setPassword("password");
+        user.setEthAddress("0xaaaa");
+
+        when(userRepository.save(user)).thenReturn(user);
+        User actual = userService.createUser(user);
+        assertThat(actual).isEqualTo(user);
+    }
+
+    @Test
+    public void testDeleteUserById() throws UserNotFoundException {
+        when(userRepository.existsById(2L)).thenReturn(false);
+        boolean actual = userService.deleteUserById(2L);
+        assertThat(actual).isEqualTo(true);
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "nps_users")
-@NoArgsConstructor @Getter @Setter @ToString @EqualsAndHashCode
+@NoArgsConstructor @Getter @Setter @ToString @EqualsAndHashCode @AllArgsConstructor
 public class User {
 
     @Id
