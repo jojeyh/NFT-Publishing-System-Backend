@@ -23,7 +23,4 @@ public class Image {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User author;
 
-    @Column(name = "nps_images_contract_address")
-    private String contractAddress;
-
 }
