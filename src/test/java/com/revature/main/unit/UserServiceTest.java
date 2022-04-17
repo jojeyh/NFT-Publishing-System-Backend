@@ -136,5 +136,4 @@ public class UserServiceTest {
 
      assertThat(actual).isNotNull();
     }
-
 }
