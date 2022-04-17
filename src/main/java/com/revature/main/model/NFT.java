@@ -26,7 +26,7 @@ public class NFT {
     private String tokenId;
 
     @Column(name = "nft_owner")
-    private String owner;
+    private Long owner;
 
     @Column(name = "nft_token_uri")
     private String tokenUri;

@@ -36,7 +36,7 @@ public class NftControllerTest {
     assertEquals(1, nft.getBody().getId());
     assertEquals("dsa", nft.getBody().getContractAddress());
     assertEquals("nefs", nft.getBody().getName());
-    assertEquals("juan", nft.getBody().getOwner());
+    assertEquals(1L, nft.getBody().getOwner());
     assertEquals("nfs", nft.getBody().getSymbol());
     assertEquals("id1", nft.getBody().getTokenId());
     assertEquals("asd", nft.getBody().getTokenUri());
