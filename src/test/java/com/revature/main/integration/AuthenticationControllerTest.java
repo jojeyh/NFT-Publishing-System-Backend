@@ -45,5 +45,15 @@ public class AuthenticationControllerTest {
                 .andExpect(content().json(expectedJson))
                 .andExpect(header().string("token", "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2R0byI6IntcInVzZXJJZFwiOjEsXCJ1c2VybmFtZVwiOlwiam9obl9zbWl0aFwifSJ9.uo4nfO0fc-D_vadTfVeabOL1WG6wAKMTEgRWxnskpZwghBHE3GQ8UYRwTRNDXZZxIBVmBJoQD0OxNXuR_g5n8w"));
     }
+    @Test
+    public void test_loginEndpoint_invalidCredentials() throws Exception {
+        LoginDTO dto = new LoginDTO();
+        dto.setUsername("invalid");
+        dto.setPassword("invalid");
+        String jsonDto = (new ObjectMapper()).writeValueAsString(dto);
 
+        this.mockMvc.perform(post("/login").contentType(MediaType.APPLICATION_JSON).content(jsonDto))
+                .andExpect(status().is(401))
+                .andExpect(content().string("Invalid username and/or password"));
+    }
 }

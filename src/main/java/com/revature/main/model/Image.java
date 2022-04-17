@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "nps_images")
-@NoArgsConstructor @Getter @Setter @ToString @EqualsAndHashCode
+@NoArgsConstructor @Getter @Setter @ToString @EqualsAndHashCode @AllArgsConstructor
 public class Image {
 
     @Id
