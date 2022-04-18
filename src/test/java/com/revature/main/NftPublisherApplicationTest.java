@@ -14,8 +14,5 @@ public class NftPublisherApplicationTest {
 
     @Test
     public void contextLoads() {
-        //assertThat(userController).isNotNull();
     }
-
-    // testing
 }
