@@ -21,7 +21,6 @@ import java.util.Optional;
 @RestController
 public class UserController {
     // TODO Add a PATCH endpoint for images, also create more robust patch logic for both images and nfts
-
     @Autowired
     JwtService jwtService;
 
