@@ -21,6 +21,11 @@ public class NftController {
     @Autowired
     JwtService jwtService;
 
+    @GetMapping(value="/users/{id}/nfts")
+    public Iterable<NFT> getUserNfts(@PathVariable String id) {
+        return nftService.getUserNfts(Long.parseLong(id));
+    }
+
     @PostMapping(value="/nfts")
     public NFT createNFT(@RequestBody NFT nft,
                          @RequestHeader(value="Authorization") String bearer)
@@ -32,7 +37,7 @@ public class NftController {
         if (token.getUserId().equals(nft.getImage().getAuthor().getId())) {
             return nftService.addNFT(nft);
         } else {
-            throw new UnauthorizedResponse("You must have authorization to delete this account");
+            throw new UnauthorizedResponse("You must have authorization to create nft");
         }
     }
 

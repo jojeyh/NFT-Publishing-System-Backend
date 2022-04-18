@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NftRepository extends CrudRepository<NFT, Long> {
+	public Iterable<NFT> findNFTByOwner(Long id);
 }
