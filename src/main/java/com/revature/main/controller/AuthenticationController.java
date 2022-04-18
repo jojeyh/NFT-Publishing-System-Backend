@@ -8,13 +8,12 @@ import com.revature.main.service.AuthenticationService;
 import com.revature.main.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.FailedLoginException;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @CrossOrigin(originPatterns = "*", exposedHeaders = "*", allowedHeaders = "*")
@@ -26,6 +25,13 @@ public class AuthenticationController {
     @Autowired
     private JwtService jwtService;
 
+    @RequestMapping(value="/**", method= RequestMethod.OPTIONS)
+    public ResponseEntity<?> getOptions(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
+        return new ResponseEntity(HttpStatus.OK);
+    }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO dto) throws JsonProcessingException {
         try {
