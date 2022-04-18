@@ -85,7 +85,7 @@ public class UserController {
         UserJwtDTO token = this.jwtService.parseJwt(jwt);
 
         if (!token.getUserId().equals(userId)) {
-            throw new UnauthorizedResponse("You may only submit reimbursements for yourself");
+            throw new UnauthorizedResponse("You may only upload images for yourself");
         }
 
         return userService.uploadImage(image);

@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.ws.Response;
 import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

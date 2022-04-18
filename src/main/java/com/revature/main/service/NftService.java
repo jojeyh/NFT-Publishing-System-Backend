@@ -22,6 +22,10 @@ public class NftService {
         return nftRepository.save(nft);
     }
 
+    public Iterable<NFT> getUserNfts(Long id) {
+	return nftRepository.findNFTByOwner(id);
+    }
+
     public Optional<NFT> getNFTById(Long id) {
         return nftRepository.findById(id);
     }
