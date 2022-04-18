@@ -1,6 +1,8 @@
 package com.revature.main.model;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -33,6 +35,7 @@ public class NFT {
 
     @JoinColumn(name = "nps_image")
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Image image;
 
 }
