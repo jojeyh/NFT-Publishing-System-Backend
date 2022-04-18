@@ -5,18 +5,21 @@ import com.revature.main.model.NFT;
 
 import com.revature.main.model.User;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
+import java.net.URI;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -28,6 +31,13 @@ public class NftControllerTest {
 
     @Autowired
     private TestRestTemplate testRestTemplate;
+
+    @LocalServerPort
+    int randomServerPort;
+
+    @Autowired
+    private MockMvc mockMvc;
+
 
 @Test
     public void getNftByIdTest() throws Exception{
@@ -44,26 +54,31 @@ public class NftControllerTest {
 
 
 
-/*@Test
+@Test
     public void createNFTTest() throws Exception{
 
-    User user = new User(2L, "jane_smith", "pass", "aox11");
-    Image image = new Image(2L, "url2", user);
-    NFT nft = new NFT(2L, "sym", "aox22", "Monkey", "id1", "john", "uri", image);
+    RestTemplate restTemplate = new RestTemplate();
+    final String baseUrl = "http://localhost:"+randomServerPort+"/nfts";
+    URI uri = new URI(baseUrl);
 
-    HttpEntity<NFT> request = new HttpEntity<>(nft);
 
-    ResponseEntity<NFT> response = testRestTemplate.postForEntity("/nfts", request, NFT.class);
+    User user = new User(1L, "john_smith", "pass12", "aox12");
+    Image image = new Image(1L, "url12", user);
+    NFT nft = new NFT(2L, "asd", "asdasd", "asdd", "ddds", 2L , "asd", image);
 
-    assertEquals(2, response.getBody().getId());
-    assertEquals("aox22", response.getBody().getContractAddress());
-    assertEquals("Monkey", response.getBody().getName());
-    assertEquals("john", response.getBody().getOwner());
-    assertEquals("sym", response.getBody().getSymbol());
-    assertEquals("id1", response.getBody().getTokenId());
-    assertEquals("uri", response.getBody().getTokenUri());
-}
-*/
-    
+    HttpHeaders headers = new HttpHeaders();
 
+    headers.set("Authorization",  "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2R0byI6IntcInVzZXJJZFwiOjEsXCJ1c2VybmFtZVwiOlwiam9obl9zbWl0aFwifSJ9.uo4nfO0fc-D_vadTfVeabOL1WG6wAKMTEgRWxnskpZwghBHE3GQ8UYRwTRNDXZZxIBVmBJoQD0OxNXuR_g5n8w");
+
+    HttpEntity<NFT> request = new HttpEntity<>(nft, headers);
+    ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
+
+    assertEquals(200, result.getStatusCodeValue());
+    }
+
+@Test
+    public void deleteNFTTest() throws Exception{
+
+    mockMvc.perform(MockMvcRequestBuilders.delete("/nfts/{id}", 1L)).andExpect(status().isOk());
+    }
 }
