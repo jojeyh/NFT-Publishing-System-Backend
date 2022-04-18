@@ -69,10 +69,10 @@ public class UserControllerTest {
         assertEquals(1, image.getBody().getId());
         assertEquals("url12", image.getBody().getImageURL());
     }
-    /*@Test
+    @Test
     public void uploadImage() throws Exception{
         RestTemplate restTemplate = new RestTemplate();
-        final String baseUrl = "http://localhost:"+randomServerPort+"/nfts";
+        final String baseUrl = "http://localhost:"+randomServerPort+"/users/1/images";
         URI uri = new URI(baseUrl);
 
         User user = new User(1L, "john_smith", "pass12", "aox12");
@@ -82,11 +82,12 @@ public class UserControllerTest {
 
         headers.set("Authorization",  "Bearer eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2R0byI6IntcInVzZXJJZFwiOjEsXCJ1c2VybmFtZVwiOlwiam9obl9zbWl0aFwifSJ9.uo4nfO0fc-D_vadTfVeabOL1WG6wAKMTEgRWxnskpZwghBHE3GQ8UYRwTRNDXZZxIBVmBJoQD0OxNXuR_g5n8w");
 
-        HttpEntity<User> request = new HttpEntity<>(user, headers);
+        HttpEntity<Image> request = new HttpEntity<>(image, headers);
         ResponseEntity<String> result = restTemplate.postForEntity(uri, request, String.class);
 
         assertEquals(200, result.getStatusCodeValue());
-    }*/
+    }
+    
 }
 
 
