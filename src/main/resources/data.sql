@@ -1,7 +1,8 @@
 insert into NPS_USERS
 (NPS_USERS_ID ,  NPS_USERS_USERNAME , NPS_USERS_PASSWORD , NPS_USERS_ETH_ADDRESS)
 values
-(1L, 'john_smith', 'pass12', 'aox12');
+(1L, 'john_smith', 'pass12', 'aox12'),
+(2L, 'jane_smith', 'pass21', 'aox21');
 
 
 insert into NPS_IMAGES
